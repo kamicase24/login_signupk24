@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk, Image
 from passlib.hash import sha512_crypt
+import webbrowser
 import os
 
 creds = 'tempfile.temp'
@@ -15,17 +16,17 @@ def Signup():
 
 	roots = Tk()
 	roots.bind('<Escape>',quit) # for develop k24
-	roots.title('R.A.WS: M.J')
+	roots.title('demo')
 	roots.geometry("800x600")
 	roots.focus_set()
 	roots.configure(background='#F7F7F7')
 
-	image = Image.open("src/img/3.jpg")
-	headerF = Frame(roots, width=100, height=100, bg="#F7F7F7", highlightthickness=0, bd= 0)
-	imgTk = ImageTk.PhotoImage(image)
-	header = Label(headerF, image=imgTk)
-	header.pack(side="top")
-	headerF.pack(side="top", padx=5, pady=5)
+	# image = Image.open("src/img/3.jpg")
+	# headerF = Frame(roots, width=100, height=100, bg="#F7F7F7", highlightthickness=0, bd= 0)
+	# imgTk = ImageTk.PhotoImage(image)
+	# header = Label(headerF, image=imgTk)
+	# header.pack(side="top")
+	# headerF.pack(side="top", padx=5, pady=5)
 
 	nameL = Label(roots, text="Nuevo Usuario", font=("roboto",14), bg="#F7F7F7", fg="#052F6C")
 	nameL.pack(side="top")
@@ -68,13 +69,13 @@ def Login():
 	
 	rootl = Tk()
 	rootl.bind('<Escape>',quit) # for develop k24
-	rootl.title('R.A.WS: M.J')
+	rootl.title('demo')
 	rootl.geometry("800x600")
 	rootl.focus_set()
 	rootl.configure(background='#F7F7F7')
 
-	title = Label(rootl, text="R.A.WS: M.J", font=("roboto", 24, "bold"), bg="#F7F7F7", fg="#052F6C")
-	title.pack(side="top")	
+	# title = Label(rootl, text="R.A.WS: M.J", font=("roboto", 24, "bold"), bg="#F7F7F7", fg="#052F6C")
+	# title.pack(side="top")	
 
 	# image = Image.open("src/img/3.jpg") # Pueden cambiar entre los distintos tipos de imagenes que prepare cambiando el número
 	# headerF = Frame(rootl, width=100, height=100, bg="#F7F7F7", highlightthickness=0, bd= 0)
@@ -121,7 +122,7 @@ def Login():
 
 	rootl.mainloop()
 
-def CheckLogin(vals):
+def CheckLogin(*vals):
 	if nameE.get() and passwordE.get():
 		print(nameE.get())
 		sha512_passwd = sha512_crypt.encrypt(passwordE.get(), rounds=5000)
@@ -141,7 +142,7 @@ def CheckLogin(vals):
 		nameE.config(highlightbackground="#052F6C", highlightcolor="#052F6C")
 
 
-def k24_info(vals):
+def k24_info(*vals):
 	rootk = Tk()
 
 	rootk.title('About')
@@ -149,8 +150,6 @@ def k24_info(vals):
 	rootk.geometry("300x150")
 	windowWidth = rootk.winfo_reqwidth()
 	windowHeight = rootk.winfo_reqheight()
-	print("Width",windowWidth,"Height",windowHeight)
-
 	positionRight = int(rootk.winfo_screenwidth()/2 - windowWidth/2)
 	positionDown = int(rootk.winfo_screenheight()/2 - windowHeight/2)
 
@@ -163,13 +162,21 @@ def k24_info(vals):
 	mainL.pack(side="top")
 	f = Frame(rootk, bg="#F7F7F7")
 	f.pack(side="top", pady=8, padx=8)
-	secondL1 = Label(f, text="GitHub", font=("trebuchet MS", 10), fg="#424242", bg="#F7F7F7")
+	secondL1 = Label(f, text="GitHub", font=("trebuchet MS", 10), fg="#536DFE", bg="#F7F7F7", cursor="hand2")
+	secondL1.bind("<Button-1>", call_back_github)
 	secondL1.pack(side="left")
-	secondL2 = Label(f, text="LinkedIn", font=("trebuchet MS", 10), fg="#424242", bg="#F7F7F7")
+	secondL2 = Label(f, text="LinkedIn", font=("trebuchet MS", 10), fg="#536DFE", bg="#F7F7F7", cursor="hand2")
+	secondL2.bind("<Button-1>", call_back_linkedin)
 	secondL2.pack(side="left")
 
 	footerL = Label(rootk, text="jora2415@gmail.com \n 2018 - 2019", font=("roboto", 10, "bold"), fg="#424242", bg="#F7F7F7")
 	footerL.pack(side="bottom", padx=8, pady=8)
+
+def call_back_github(*event):
+	webbrowser.open_new(r"https://github.com/kamicase24")
+
+def call_back_linkedin(*event):
+	webbrowser.open_new(r"linkedin.com/in/jrojasart/")
 
 
 	# with open(creds) as f:
